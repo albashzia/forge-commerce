@@ -1,4 +1,4 @@
-package forge_commerce;
+package com.forgecommerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
