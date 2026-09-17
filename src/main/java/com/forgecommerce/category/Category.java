@@ -4,21 +4,21 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime;
+import java.time.LocalDateTime; // Import LocalDateTime API to use Date
 
-@Entity
-@Table(name="categories")
+@Entity // Defines that this entity is a database object
+@Table(name="categories") // Defines the name of collection inside the database
 public class Category {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Defines the primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // This filed is defined on runtime by database
     private Long id;
 
-    @NotBlank
-    @Size(max = 50)
+    @NotBlank // Doesn't allows blank data
+    @Size(max = 50) // Defines the maximum size of the name field
     private String name;
 
-    @Size(max = 250)
+    @Size(max = 250) // Defines the maximum size of the description field
     private String description;
 
     private LocalDateTime createdAt;
@@ -27,6 +27,7 @@ public class Category {
     public Category(){
     }
 
+    // Getter Methods
     public Long getId(){
         return id;
     }
@@ -47,6 +48,7 @@ public class Category {
         return updatedAt;
     }
 
+    // Setter Methods
     public void setName(String name) {
         this.name = name;
     }
