@@ -4,21 +4,21 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime; // Import LocalDateTime API to use Date
+import java.time.LocalDateTime; // Provides date and time without timezone information
 
-@Entity // Defines that this entity is a database object
-@Table(name="categories") // Defines the name of collection inside the database
+@Entity // Marks this class as a JPA entity that is mapped to the database
+@Table(name="categories") //  Maps this entity to the "categories" database table
 public class Category {
 
-    @Id // Defines the primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // This filed is defined on runtime by database
+    @Id // Marks this field as the primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // The database generates the ID when a new row is inserted
     private Long id;
 
-    @NotBlank // Doesn't allows blank data
-    @Size(max = 50) // Defines the maximum size of the name field
+    @NotBlank // Prevents the value from being null, empty, or only whitespace
+    @Size(max = 50) // Limits the name to a maximum of 50 characters
     private String name;
 
-    @Size(max = 250) // Defines the maximum size of the description field
+    @Size(max = 250) // Limits the description to a maximum of 250 characters
     private String description;
 
     private LocalDateTime createdAt;
