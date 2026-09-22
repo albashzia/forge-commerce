@@ -6,6 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,5 +40,19 @@ public class CategoryServiceImplTest {
 
         // Verify
         verify(categoryRepository).save(category);
+    }
+
+    @Test
+    void getCategoryById(){
+        Long id = 1L;
+        Category category = new Category();
+        category.setName("Electronics");
+        category.setDescription("Electrical products");
+        when(categoryRepository.findById(id)).thenReturn(Optional.of(category));
+
+        Category category1 = categoryService.getCategoryById(id);
+
+        assertEquals(category,category1);
+        verify(categoryRepository).findById(id);
     }
 }
