@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -57,6 +58,22 @@ public class CategoryServiceImplTest {
 
         //Assert
         assertEquals(category,category1);
+
+        //Verify
+        verify(categoryRepository).findById(id);
+    }
+
+    @Test
+    void getCategoryById_NotFound(){
+
+        //Act
+        Long id = 1L;
+        when(categoryRepository.findById(id)).thenReturn(Optional.empty());
+
+        //Assert
+        assertThrows(RuntimeException.class,()->{
+            categoryService.getCategoryById(id);
+        });
 
         //Verify
         verify(categoryRepository).findById(id);
