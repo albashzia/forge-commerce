@@ -44,15 +44,21 @@ public class CategoryServiceImplTest {
 
     @Test
     void getCategoryById(){
+
+        //Arrange
         Long id = 1L;
         Category category = new Category();
         category.setName("Electronics");
         category.setDescription("Electrical products");
         when(categoryRepository.findById(id)).thenReturn(Optional.of(category));
 
+        //Act
         Category category1 = categoryService.getCategoryById(id);
 
+        //Assert
         assertEquals(category,category1);
+
+        //Verify
         verify(categoryRepository).findById(id);
     }
 }
