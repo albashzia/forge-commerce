@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -77,5 +78,33 @@ public class CategoryServiceImplTest {
 
         //Verify
         verify(categoryRepository).findById(id);
+    }
+
+
+    @Test
+    void getAllCategories(){
+
+        //Act
+        Category category1 = new Category();
+        category1.setName("Electronics");
+        category1.setDescription("Electrical products");
+        Category category2 = new Category();
+        category2.setName("Furniture");
+        category2.setDescription("Beds, Sofas and Chairs");
+        Category category3 = new Category();
+        category3.setName("Edibles");
+        category3.setDescription("Snacks and Beverages");
+
+        List<Category> categoryList = List.of(category1, category2, category3);
+
+        when(categoryRepository.findAll()).thenReturn(categoryList);
+
+        List<Category> returnedCategories = categoryService.getAllCategories();
+
+        //Assert
+        assertEquals(categoryList,returnedCategories);
+
+        //Verify
+        verify(categoryRepository).findAll();
     }
 }
