@@ -11,8 +11,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class) // Tells JUnit to use MockitoExtension for this class
@@ -106,5 +105,18 @@ public class CategoryServiceImplTest {
 
         //Verify
         verify(categoryRepository).findAll();
+    }
+
+    @Test
+    void updateCategory_IdMismatch(){
+        Category category3 = new Category();
+        category3.setName("Electronics");
+        category3.setDescription("Electrical Items");
+
+        assertThrows(IllegalArgumentException.class,()->{
+            categoryService.updateCategory(1L,category3);
+        });
+
+        verify(categoryRepository, never()).findById(1L);
     }
 }
